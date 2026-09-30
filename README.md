@@ -14,9 +14,39 @@ python -m pip install -r requirements.txt
 
 Keep the treadmill powered on and in range. Close the PitPat phone app first — BLE is typically one client at a time.
 
+## Find your treadmill
+
+Power the treadmill on, then search for it:
+
+```powershell
+python cli.py scan
+```
+
+The line it prints is the pad name and its Bluetooth address:
+
+```text
+PitPat-T01  AA:BB:CC:DD:EE:FF
+```
+
+Copy that address and pass it to any control command:
+
+```powershell
+python cli.py mute --address AA:BB:CC:DD:EE:FF
+```
+
+Replace `AA:BB:CC:DD:EE:FF` with the address from the scan. `mute` does not move the belt. The same `--address` flag works on `status`, `watch`, `start`, `speed`, `pause`, `stop`, and `unmute`.
+
+If you leave `--address` off, the command scans and connects to the first PitPat, DeerRun, or Superun pad it finds. Pass the address when more than one pad is nearby, or when you want to skip the search.
+
+If the scan does not find the treadmill, list everything nearby and look for a line marked `LIKELY TREADMILL/FITNESS`. The address is the first value on that line:
+
+```powershell
+python scan.py
+```
+
 ## Commands
 
-Control commands scan for a pad unless you pass `--address AA:BB:CC:DD:EE:FF`. Speed arguments are km/h. `start` and `speed` move the belt — keep the safety key in and stand ready.
+Speed arguments are km/h. `start` and `speed` move the belt — keep the safety key in and stand ready.
 
 | Command | What it does | Example |
 | --- | --- | --- |
