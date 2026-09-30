@@ -2,6 +2,8 @@
 
 Python control for the **PitPat-T01** walking treadmill over Bluetooth Low Energy. The official PitPat app is not required.
 
+I made this to mute my treadmill, which has no mute switch. Every button press beeps, and there is no hardware control for that sound. `python cli.py mute` sends the same settings packet the PitPat app uses.
+
 These pads advertise as `PitPat-T01` (and similar DeerRun / Superun names) with service `0xFBA0`. Wi‑Fi and NFC are used by the PitPat app for cloud pairing; belt control is BLE.
 
 ## Setup
@@ -26,7 +28,7 @@ Control commands scan for a pad unless you pass `--address AA:BB:CC:DD:EE:FF`. S
 | `python cli.py stop` | Stop the belt | `python cli.py stop` |
 | `python cli.py mute` | Try to silence action beeps (does not move the belt) | `python cli.py mute` |
 | `python cli.py unmute` | Turn action beeps back on | `python cli.py unmute` |
-| `python cli.py scan` | BLE search for a PitPat / DeerRun / Superun pad (ignores the hardcoded address) | `python cli.py scan` |
+| `python cli.py scan` | BLE search for a PitPat / DeerRun / Superun pad | `python cli.py scan` |
 | `python scan.py` | List nearby BLE devices and flag likely fitness gear. `--seconds` changes scan length (default 20) | `python scan.py --seconds 20` |
 | `python gatt_inspect.py` | Dump GATT services and characteristics on the pad | `python gatt_inspect.py` |
 
